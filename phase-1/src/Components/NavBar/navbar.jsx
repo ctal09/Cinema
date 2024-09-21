@@ -1,22 +1,35 @@
-// Navbar.js
-import React from 'react';
+// Navbar.jsx
+import React, { useState } from 'react';
 import './Styles/navbar.css';
-
+import logo from '../../Images/Logo.png';
 
 const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-brand">
-                <img src="../../Images/Logo.png" alt="Cinema Logo" className="logo" />
-                <span className="cinema-name">Sital Cinema</span>
+                <div className="logo-container">
+                    <img src={logo} alt="Cinema Logo" className="logo" />
+                </div>
+                <span className="cinema-name">Cinema Name</span>
             </div>
-            <ul className="navbar-categories">
+
+            <div className="hamburger" onClick={toggleMenu}>
+                ☰
+            </div>
+
+            <ul className={`navbar-categories ${isMenuOpen ? 'active' : ''}`}>
                 <li>Home</li>
                 <li>Movies</li>
                 <li>Shows</li>
                 <li>Contact</li>
-                <li>Categories</li>
             </ul>
+
             <div className="navbar-buttons">
                 <button className="btn sign-in">Sign In</button>
                 <button className="btn login">Login</button>
