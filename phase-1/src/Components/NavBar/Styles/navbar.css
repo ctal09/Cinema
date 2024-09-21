@@ -1,0 +1,44 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #282c34;
+    color: white;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    /* Adjust logo size */
+    height: auto;
+    margin-right: 10px;
+}
+
+.navbar-categories {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-categories li {
+    cursor: pointer;
+}
+
+.navbar-buttons .btn {
+    margin-left: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.navbar-buttons .btn:hover {
+    background-color: #21a1f1;
+}
