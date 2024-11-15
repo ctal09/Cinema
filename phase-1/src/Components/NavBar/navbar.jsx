@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './Styles/navbar.css';
 import logo from '../../Images/Logo.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
