@@ -1,0 +1,49 @@
+/* Ensure the carousel images are responsive */
+.img {
+    width: 100%;
+    /* Ensures the image spans the width of its container */
+    height: 800px;
+    /* Sets a fixed height for consistency across slides */
+    object-fit: cover;
+    /* Ensures the image fills the container without distortion */
+    border-radius: 10px;
+    /* Optional: Adds slightly rounded corners */
+    object-position: 40% 40%;
+    transition: transform 0.5s ease-in-out;
+    /* Smooth hover effect */
+}
+
+/* Add a subtle hover zoom effect */
+.img:hover {
+    transform: scale(1.05);
+    /* Zooms the image slightly on hover */
+}
+
+/* Optional: Style the carousel captions */
+.carousel-caption h5 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    /* Text color for visibility */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    /* Adds a shadow for better contrast */
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+    color: #dddddd;
+    /* Lighter color for the description text */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Make the carousel itself more visually appealing */
+.carousel {
+    border: 2px solid #ddd;
+    /* Adds a border around the carousel */
+    border-radius: 15px;
+    /* Rounds the edges of the carousel */
+    overflow: hidden;
+    /* Ensures content stays within the rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+}
