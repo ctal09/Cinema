@@ -114,7 +114,6 @@ export default function MovieTable() {
             <div className="table-responsive">
                 <table className="table table-striped">
 
-
                     <tbody>
                         <th>Movie Title</th>
                         <th>Description</th>
