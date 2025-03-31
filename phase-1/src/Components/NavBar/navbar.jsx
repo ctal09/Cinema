@@ -1,14 +1,26 @@
-// Navbar.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Styles/navbar.css';
 import logo from '../../Images/Logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import Signin from '../signin';  // Import the Signin component
+import Signin from '../signin';
+import SignupModal from '../adduser';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showSignin, setShowSignin] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+
+    useEffect(() => {
+        // Retrieve login state from localStorage
+        const storedRole = localStorage.getItem("userRole");
+        if (storedRole) {
+            setLoggedIn(true);
+            setUserRole(storedRole);
+        }
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -16,6 +28,23 @@ const Navbar = () => {
 
     const handleSigninClick = () => {
         setShowSignin(true);
+    };
+
+    const handleSignUpClick = () => {
+        setShowSignUp(true);
+    };
+
+    const handleLoginSuccess = (role) => {
+        setLoggedIn(true);
+        setUserRole(role);
+        localStorage.setItem("userRole", role); // Store role in localStorage
+        setShowSignin(false);
+    };
+
+    const handleLogout = () => {
+        setLoggedIn(false);
+        setUserRole(null);
+        localStorage.removeItem("userRole"); // Clear login session
     };
 
     return (
@@ -40,12 +69,22 @@ const Navbar = () => {
                 </ul>
 
                 <div className="navbar-buttons">
-                    <button onClick={handleSigninClick} className="btn sign-in">Sign In</button>
-                    <button onClick={handleSigninClick} className="btn login">Login</button>
+                    {loggedIn ? (
+                        <div className="user-info">
+                            <span>Welcome, {userRole === "admin" ? "Admin" : "User"}</span>
+                            <button onClick={handleLogout} className="btn logout">Logout</button>
+                        </div>
+                    ) : (
+                        <>
+                            <button onClick={handleSignUpClick} className="btn sign-up">Sign Up</button>
+                            <button onClick={handleSigninClick} className="btn login">Login</button>
+                        </>
+                    )}
                 </div>
             </nav>
 
-            <Signin isOpen={showSignin} onClose={() => setShowSignin(false)} />
+            <Signin isOpen={showSignin} onClose={() => setShowSignin(false)} onLoginSuccess={handleLoginSuccess} />
+            <SignupModal isOpen={showSignUp} onClose={() => setShowSignUp(false)} />
         </>
     );
 };

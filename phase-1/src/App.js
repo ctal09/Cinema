@@ -6,7 +6,7 @@ import Slider from './Components/topoviesonshow';
 import Othermovies from './Components/othermomvies';
 import { Routes, Route } from 'react-router-dom';
 import Signin from './Components/signin';
-import MovieForm from './Components/shitaldulal@gmail.com/crud';
+import MovieForm from './Components/CRUD/crud';
 
 function App() {
   return (

@@ -3,12 +3,11 @@ import './signin.css';
 import Modal from './modal';
 import { useNavigate } from "react-router-dom";
 
-const Signin = ({ isOpen, onClose }) => {
-    const [email, setEmail] = useState('');
+const Signin = ({ isOpen, onClose, onLoginSuccess }) => {
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
 
     const navigate = useNavigate();
 
@@ -22,21 +21,21 @@ const Signin = ({ isOpen, onClose }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000/',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ email: username, password }),
             });
 
             const data = await response.json();
 
             if (data.success) {
-                // Login successful
                 console.log('Login successful');
+                onLoginSuccess(data.role); // Pass role to Navbar
+                localStorage.setItem("userRole", data.role); // Store in localStorage
                 onClose();
-                // Redirect to the specified page
-                navigate(`${data.redirect}`);
+                if (data.redirect) {
+                    navigate(data.redirect);
+                }
             } else {
-                // Login failed
                 setError(data.message);
             }
         } catch (err) {
@@ -54,12 +53,12 @@ const Signin = ({ isOpen, onClose }) => {
                 {error && <div className="error-message" style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="username">Username</label>
                         <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                             disabled={isLoading}
                         />
