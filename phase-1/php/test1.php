@@ -1,6 +1,6 @@
 <?php
 
 
-echo "Hello Success!"
+echo "Success ! "
 
 ?>
